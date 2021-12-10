@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.cs" type="Script" id=2]
 [ext_resource path="res://Models/WindTurbine1.glb" type="PackedScene" id=3]
@@ -20,8 +20,6 @@ background_sky = SubResource( 1 )
 
 [sub_resource type="CubeMesh" id=3]
 
-[sub_resource type="ParticlesMaterial" id=7]
-
 [node name="Spatial" type="Spatial"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -37,7 +35,6 @@ transform = Transform( 25, 0, 0, 0, 1, 0, 0, 0, 25, 0, 0, 0 )
 shape = SubResource( 4 )
 
 [node name="Ground" type="MeshInstance" parent="StaticBody/CollisionShape"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00632278, 0.573854, 0.0195 )
 mesh = SubResource( 6 )
 skeleton = NodePath("../../..")
 material/0 = ExtResource( 6 )
@@ -63,8 +60,3 @@ fov = 90.0
 
 [node name="WindTurbine1" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.20106, 28.4939, -23.1277 )
-
-[node name="Particles" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02387, 8.8154, -16.0457 )
-visibility_aabb = AABB( -0.312988, -3.72716, -5.02539, 8, 7.85081, 8 )
-process_material = SubResource( 7 )
