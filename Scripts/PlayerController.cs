@@ -8,8 +8,8 @@ public class PlayerController : RigidBody
 	#endregion
 
 	#region Variables - mouse
-	public float sensX = 0.01f;
-	public float sensY = 0.01f;
+	public float sensX = 0.02f;
+	public float sensY = 0.02f;
 	public float maxRotationY = 90f;
 
 	private float mouseMovementX;
@@ -18,9 +18,13 @@ public class PlayerController : RigidBody
 
 	#region Variables - movement
 	public Vector3 linearVelocityLocal;
-	private float[] movementSpeed = new float[] { 100000, 100000, 50000, 50000 };
+	private float[] movementSpeed = new float[4];
+	private float[] movementSpeedWalk = new float[] { 50000, 50000, 25000, 25000 };
+	private float[] movementSpeedRun = new float[] { 100000, 100000, 50000, 50000 };
+	private float[] movementSpeedCrouch = new float[] { 25000, 25000, 12500, 12500 };
 	private float stopSpeed = 10000;
 	private float jumpForce = 250;
+	private bool isCrouching;
 	#endregion
 
 	// Called when the node enters the scene tree for the first time.
@@ -29,6 +33,8 @@ public class PlayerController : RigidBody
 		Input.SetMouseMode(Input.MouseMode.Captured);
 
 		camera = GetNode<Camera>("Camera");
+
+		movementSpeed = movementSpeedWalk;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,12 +44,6 @@ public class PlayerController : RigidBody
 		linearVelocityLocal = Transform.basis.Orthonormalized().XformInv(LinearVelocity);
 
 		// Mouse Y
-		var e = maxRotationY - mouseMovementY * sensY;
-		if (e < mouseMovementY * sensY)
-		{
-			mouseMovementY = e;
-		}
-
 		if (camera.RotationDegrees.x > -maxRotationY && camera.RotationDegrees.x < maxRotationY)
 		{
 			camera.GlobalRotate(Transform.basis.x, -mouseMovementY * sensY);
@@ -58,12 +58,9 @@ public class PlayerController : RigidBody
 		}
 		mouseMovementY = 0;
 
-		camera.RotationDegrees = new Vector3(camera.RotationDegrees.x, camera.RotationDegrees.y, Mathf.Clamp(-linearVelocityLocal.x, -5f, 5f));
-
 		if (Input.IsActionJustPressed("restart"))
 		{
 			var timeBeforeSceneChange = OS.GetTicksMsec();
-			// GetTree().ChangeScene("res://main_scene.tscn");
 			GetTree().ReloadCurrentScene();
 			var timeAfterSceneChange = OS.GetTicksMsec();
 
@@ -78,6 +75,38 @@ public class PlayerController : RigidBody
 	public override void _PhysicsProcess(float delta)
 	{
 		// Movement
+		if (Input.IsActionJustPressed("run"))
+		{
+			movementSpeed = movementSpeedRun;
+		}
+		else if (Input.IsActionJustReleased("run"))
+		{
+			movementSpeed = movementSpeedWalk;
+		}
+
+		if (Input.IsActionJustPressed("crouch_hold"))
+		{
+			if (isCrouching)
+			{
+				isCrouching = false;
+				movementSpeed = movementSpeedWalk;
+			}
+			else
+			{
+				isCrouching = true;
+				movementSpeed = movementSpeedCrouch;
+			}
+		}
+
+		if (Input.IsActionJustPressed("crouch"))
+		{
+			movementSpeed = movementSpeedCrouch;
+		}
+		else if (Input.IsActionJustReleased("crouch"))
+		{
+			movementSpeed = movementSpeedWalk;
+		}
+
 		if (Input.IsActionPressed("move_forward"))
 		{
 			AddForce(-Transform.basis.z * movementSpeed[0] * delta, Vector3.Zero);
