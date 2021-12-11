@@ -52,6 +52,7 @@ transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Player/CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0524406, 0.0161395, 0.894166 )
 mesh = SubResource( 3 )
 material/0 = ExtResource( 5 )
 
