@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/WindTurbine1.glb-4a309a3c3a32f56a6adff69d8345a1f4.scn"
+path="res://.import/Bush1.glb-a12d5171788406c86246f355751cbd8e.scn"
 
 [deps]
 
-source_file="res://Models/WindTurbine1.glb"
-dest_files=[ "res://.import/WindTurbine1.glb-4a309a3c3a32f56a6adff69d8345a1f4.scn" ]
+source_file="res://Models/Bush1/Bush1.glb"
+dest_files=[ "res://.import/Bush1.glb-a12d5171788406c86246f355751cbd8e.scn" ]
 
 [params]
 
