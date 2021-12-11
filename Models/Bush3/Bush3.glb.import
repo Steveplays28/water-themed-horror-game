@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/WindTurbine1.glb-4a309a3c3a32f56a6adff69d8345a1f4.scn"
+path="res://.import/Bush3.glb-4f5e1f6378966b09c36ca27c6d558fef.scn"
 
 [deps]
 
-source_file="res://Models/WindTurbine1.glb"
-dest_files=[ "res://.import/WindTurbine1.glb-4a309a3c3a32f56a6adff69d8345a1f4.scn" ]
+source_file="res://Models/Bush3/Bush3.glb"
+dest_files=[ "res://.import/Bush3.glb-4f5e1f6378966b09c36ca27c6d558fef.scn" ]
 
 [params]
 
@@ -16,9 +16,11 @@ nodes/root_name="Scene Root"
 nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
+nodes/use_legacy_names=false
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
+meshes/octahedral_compression=true
 meshes/compress=4286
 meshes/ensure_tangents=true
 meshes/storage=0
