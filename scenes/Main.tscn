@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.cs" type="Script" id=2]
-[ext_resource path="res://Models/WindTurbine1.glb" type="PackedScene" id=3]
 [ext_resource path="res://Materials/Physics/ZeroFriction.tres" type="PhysicsMaterial" id=4]
 [ext_resource path="res://Materials/White.tres" type="Material" id=5]
 [ext_resource path="res://Materials/Blue.tres" type="Material" id=6]
@@ -57,6 +56,3 @@ material/0 = ExtResource( 5 )
 
 [node name="Camera" type="Camera" parent="Player"]
 fov = 90.0
-
-[node name="WindTurbine1" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.20106, 28.4939, -23.1277 )
