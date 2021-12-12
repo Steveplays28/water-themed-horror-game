@@ -30,34 +30,29 @@ public class PlayerController : RigidBody
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		base._Ready();
+
 		Input.SetMouseMode(Input.MouseMode.Captured);
 
 		camera = GetNode<Camera>("Camera");
-
 		movementSpeed = movementSpeedWalk;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
 	{
+		base._Process(delta);
+
 		// Convert linear velocity from global to local
 		linearVelocityLocal = Transform.basis.Orthonormalized().XformInv(LinearVelocity);
 
 		// Mouse Y
-		if (camera.RotationDegrees.x > -maxRotationY && camera.RotationDegrees.x < maxRotationY)
-		{
-			camera.GlobalRotate(Transform.basis.x, -mouseMovementY * sensY);
-		}
-		else if (camera.RotationDegrees.x < -maxRotationY && -mouseMovementY > 0)
-		{
-			camera.GlobalRotate(Transform.basis.x, -mouseMovementY * sensY);
-		}
-		else if (camera.RotationDegrees.x > maxRotationY && -mouseMovementY < 0)
-		{
-			camera.GlobalRotate(Transform.basis.x, -mouseMovementY * sensY);
-		}
+		camera.RotationDegrees += new Vector3(-mouseMovementY, 0, 0);
+		camera.RotationDegrees = new Vector3(Mathf.Clamp(camera.RotationDegrees.x, -maxRotationY, maxRotationY), camera.RotationDegrees.y, camera.RotationDegrees.z);
+		
 		mouseMovementY = 0;
 
+		// Restarting and mouse escape
 		if (Input.IsActionJustPressed("restart"))
 		{
 			var timeBeforeSceneChange = OS.GetTicksMsec();
@@ -74,6 +69,8 @@ public class PlayerController : RigidBody
 
 	public override void _PhysicsProcess(float delta)
 	{
+		base._PhysicsProcess(delta);
+
 		// Movement
 		if (Input.IsActionJustPressed("run"))
 		{
@@ -128,21 +125,21 @@ public class PlayerController : RigidBody
 		{
 			ApplyImpulse(Vector3.Zero, Transform.basis.y * jumpForce);
 		}
-
-		base._PhysicsProcess(delta);
 	}
 
 	public override void _IntegrateForces(PhysicsDirectBodyState state)
 	{
+		base._IntegrateForces(state);
+
 		// Mouse X
 		state.AngularVelocity = -mouseMovementX * sensX * Transform.basis.y * 100;
 		mouseMovementX = 0;
-
-		base._IntegrateForces(state);
 	}
 
 	public override void _Input(InputEvent inputEvent)
 	{
+		base._Input(inputEvent);
+
 		// Mouse input
 		if (inputEvent is InputEventMouseMotion)
 		{
@@ -151,8 +148,6 @@ public class PlayerController : RigidBody
 			mouseMovementX = inputEventMouseMotion.Relative.x;
 			mouseMovementY = inputEventMouseMotion.Relative.y;
 		}
-
-		base._Input(inputEvent);
 	}
 
 	private void InfiniteMouse()
