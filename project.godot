@@ -22,6 +22,10 @@ config/icon="res://Icon.png"
 
 mix_rate=48000
 
+[autoload]
+
+WaypointController="*res://scripts/waypoint_system/WaypointController.cs"
+
 [input]
 
 move_forward={
