@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.cs" type="Script" id=2]
-[ext_resource path="res://Materials/Physics/ZeroFriction.tres" type="PhysicsMaterial" id=4]
-[ext_resource path="res://Materials/White.tres" type="Material" id=5]
-[ext_resource path="res://Materials/Blue.tres" type="Material" id=6]
+[ext_resource path="res://Resources/Materials/Physics/MaxFriction.tres" type="PhysicsMaterial" id=4]
+[ext_resource path="res://Resources/Materials/White.tres" type="Material" id=5]
+[ext_resource path="res://Resources/Materials/Blue.tres" type="Material" id=6]
 
 [sub_resource type="ProceduralSky" id=1]
 

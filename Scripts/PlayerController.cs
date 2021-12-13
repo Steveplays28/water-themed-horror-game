@@ -22,8 +22,12 @@ public class PlayerController : RigidBody
 	private float[] movementSpeedWalk = new float[] { 50000, 50000, 25000, 25000 };
 	private float[] movementSpeedRun = new float[] { 100000, 100000, 50000, 50000 };
 	private float[] movementSpeedCrouch = new float[] { 25000, 25000, 12500, 12500 };
-	private float stopSpeed = 10000;
-	private float jumpForce = 250;
+
+	private Vector3 maxSpeed;
+	private Vector3 maxSpeedWalk = new Vector3(1f, 1f, 1f);
+	private Vector3 maxSpeedRun = new Vector3(2f, 2f, 2f);
+	private Vector3 maxSpeedCrouch = new Vector3(0.5f, 0.5f, 0.5f);
+	private float jumpForce = 250f;
 	private bool isCrouching;
 	#endregion
 
@@ -36,6 +40,7 @@ public class PlayerController : RigidBody
 
 		camera = GetNode<Camera>("Camera");
 		movementSpeed = movementSpeedWalk;
+		maxSpeed = maxSpeedWalk;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,7 +54,7 @@ public class PlayerController : RigidBody
 		// Mouse Y
 		camera.RotationDegrees += new Vector3(-mouseMovementY, 0, 0);
 		camera.RotationDegrees = new Vector3(Mathf.Clamp(camera.RotationDegrees.x, -maxRotationY, maxRotationY), camera.RotationDegrees.y, camera.RotationDegrees.z);
-		
+
 		mouseMovementY = 0;
 
 		// Restarting and mouse escape
@@ -75,10 +80,12 @@ public class PlayerController : RigidBody
 		if (Input.IsActionJustPressed("run"))
 		{
 			movementSpeed = movementSpeedRun;
+			maxSpeed = maxSpeedRun;
 		}
 		else if (Input.IsActionJustReleased("run"))
 		{
 			movementSpeed = movementSpeedWalk;
+			maxSpeed = maxSpeedWalk;
 		}
 
 		if (Input.IsActionJustPressed("crouch_hold"))
@@ -87,38 +94,48 @@ public class PlayerController : RigidBody
 			{
 				isCrouching = false;
 				movementSpeed = movementSpeedWalk;
+				maxSpeed = maxSpeedWalk;
 			}
 			else
 			{
 				isCrouching = true;
 				movementSpeed = movementSpeedCrouch;
+				maxSpeed = maxSpeedCrouch;
 			}
 		}
 
 		if (Input.IsActionJustPressed("crouch"))
 		{
 			movementSpeed = movementSpeedCrouch;
+			maxSpeed = maxSpeedCrouch;
 		}
 		else if (Input.IsActionJustReleased("crouch"))
 		{
 			movementSpeed = movementSpeedWalk;
+			maxSpeed = maxSpeedWalk;
 		}
 
-		if (Input.IsActionPressed("move_forward"))
+		if (Mathf.Abs(linearVelocityLocal.z) < maxSpeed.z)
 		{
-			AddForce(-Transform.basis.z * movementSpeed[0] * delta, Vector3.Zero);
+			if (Input.IsActionPressed("move_forward"))
+			{
+				AddForce(-Transform.basis.z * movementSpeed[0] * delta, Vector3.Zero);
+			}
+			if (Input.IsActionPressed("move_backwards"))
+			{
+				AddForce(Transform.basis.z * movementSpeed[1] * delta, Vector3.Zero);
+			}
 		}
-		if (Input.IsActionPressed("move_backwards"))
+		if (Mathf.Abs(linearVelocityLocal.x) < maxSpeed.x)
 		{
-			AddForce(Transform.basis.z * movementSpeed[1] * delta, Vector3.Zero);
-		}
-		if (Input.IsActionPressed("move_right"))
-		{
-			AddForce(Transform.basis.x * movementSpeed[2] * delta, Vector3.Zero);
-		}
-		if (Input.IsActionPressed("move_left"))
-		{
-			AddForce(-Transform.basis.x * movementSpeed[3] * delta, Vector3.Zero);
+			if (Input.IsActionPressed("move_right"))
+			{
+				AddForce(Transform.basis.x * movementSpeed[2] * delta, Vector3.Zero);
+			}
+			if (Input.IsActionPressed("move_left"))
+			{
+				AddForce(-Transform.basis.x * movementSpeed[3] * delta, Vector3.Zero);
+			}
 		}
 
 		if (Input.IsActionJustPressed("jump"))
