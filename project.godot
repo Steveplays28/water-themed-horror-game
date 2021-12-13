@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="water-themed-horror-game"
-run/main_scene="res://Scenes/Steve.tscn"
+run/main_scene="res://scenes/Steve.tscn"
 config/icon="res://Icon.png"
 
 [audio]
