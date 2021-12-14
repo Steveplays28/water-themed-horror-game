@@ -1,3 +1,61 @@
-[gd_scene format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/themes/big_text_theme.tres" type="Theme" id=1]
+[ext_resource path="res://resources/themes/white_styleboxflat.tres" type="StyleBox" id=2]
+[ext_resource path="res://scripts/MenuController.cs" type="Script" id=3]
 
 [node name="Spatial" type="Spatial"]
+
+[node name="Menus" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" type="Control" parent="Menus"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="Menus/MainMenu"]
+margin_left = 460.0
+margin_top = 163.0
+margin_right = 699.0
+margin_bottom = 287.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsButton" type="Button" parent="Menus/MainMenu"]
+margin_left = 430.0
+margin_top = 255.0
+margin_right = 796.0
+margin_bottom = 379.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
+text = "Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuitButton" type="Button" parent="Menus/MainMenu"]
+margin_left = 460.0
+margin_top = 345.0
+margin_right = 699.0
+margin_bottom = 469.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 1 )
+custom_styles/normal = ExtResource( 2 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
