@@ -4,6 +4,7 @@ using Godot.Collections;
 public class WaypointController : Node
 {
 	public static Dictionary<int, Node> waypoints;
+	public static Dictionary<int, Node> passedWaypoints;
 
 	public override void _Ready()
 	{

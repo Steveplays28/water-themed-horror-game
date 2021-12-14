@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Resources/Materials/Physics/MaxFriction.tres" type="PhysicsMaterial" id=1]
+[ext_resource path="res://resources/materials/physics/max_friction.tres" type="PhysicsMaterial" id=1]
 [ext_resource path="res://Scripts/VoicelineController.cs" type="Script" id=2]
-[ext_resource path="res://assets/voiceline_trigger.tscn" type="PackedScene" id=3]
+[ext_resource path="res://resources/materials/white.tres" type="Material" id=3]
 [ext_resource path="res://Scripts/PlayerController.cs" type="Script" id=4]
-[ext_resource path="res://Resources/Materials/White.tres" type="Material" id=5]
-[ext_resource path="res://Resources/Materials/Blue.tres" type="Material" id=6]
+[ext_resource path="res://resources/materials/blue.tres" type="Material" id=5]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -39,7 +38,7 @@ transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0 )
 shape = SubResource( 8 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Ground/CollisionShape"]
-material_override = ExtResource( 6 )
+material_override = ExtResource( 5 )
 mesh = SubResource( 9 )
 material/0 = null
 
@@ -57,7 +56,7 @@ shape = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Player/CollisionShape"]
 mesh = SubResource( 3 )
-material/0 = ExtResource( 5 )
+material/0 = ExtResource( 3 )
 
 [node name="Camera" type="Camera" parent="Player"]
 fov = 90.0
@@ -74,12 +73,3 @@ script = ExtResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player"]
 stream = SubResource( 7 )
-
-[node name="VoicelineTrigger" parent="." instance=ExtResource( 3 )]
-transform = Transform( 25, 0, 0, 0, -4.37114e-08, -25, 0, 1, -1.09278e-06, 0, 5, 10 )
-
-[node name="VoicelineReference" parent="VoicelineTrigger" index="1"]
-voicelinePath = "res://Resources/Audio/Voicelines/Voiceline1_NE.wav"
-voicelineSubtitle = "But what did I care? I was going to be free. I had already stopped caring about little things like that sometime before this, like the constant pain from the salty winds battering my stretched purple skin and the cold freezing my feeble bones to their well-exposed cores, leaving my body in a constant shiver."
-
-[editable path="VoicelineTrigger"]
