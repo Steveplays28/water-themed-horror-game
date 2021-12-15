@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="water-themed-horror-game"
-run/main_scene="res://scenes/main_menu.tscn"
+run/main_scene="res://scenes/steve_test.tscn"
 config/icon="res://icon.png"
 
 [audio]
@@ -25,6 +25,7 @@ mix_rate=48000
 [autoload]
 
 WaypointController="*res://scripts/waypoint_system/WaypointController.cs"
+MainMenu="*res://scenes/main_menu.tscn"
 
 [input]
 
