@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://resources/themes/big_text_theme.tres" type="Theme" id=1]
-[ext_resource path="res://assets/sprites/Button.png" type="Texture" id=2]
+[ext_resource path="res://resources/sprites/Button.png" type="Texture" id=2]
 [ext_resource path="res://scripts/MenuController.cs" type="Script" id=3]
 
 [sub_resource type="StyleBoxTexture" id=1]
