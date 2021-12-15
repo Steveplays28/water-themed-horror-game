@@ -36,8 +36,6 @@ public class PlayerController : RigidBody
 	{
 		base._Ready();
 
-		Input.SetMouseMode(Input.MouseMode.Captured);
-
 		camera = GetNode<Camera>("Camera");
 		movementSpeed = movementSpeedWalk;
 		maxSpeed = maxSpeedWalk;

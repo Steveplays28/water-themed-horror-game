@@ -1,7 +1,7 @@
 using System;
 using Godot;
 
-public class MenuController : Node
+public class MenuController : Control
 {
 	Button startButton;
 	Button settingsButton;
@@ -19,7 +19,8 @@ public class MenuController : Node
 
 	public void _StartButtonPressed()
 	{
-		LoadWorld();
+		Visible = false;
+		Input.SetMouseMode(Input.MouseMode.Captured);
 	}
 
 	public void _QuitButtonPressed()
